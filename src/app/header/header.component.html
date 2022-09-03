@@ -6,12 +6,22 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <div class=" col-md-4">
+    <div class="collapse navbar-collapse" >
+
+      <div class=" col-md-5" style="float: right">
         <a class="navbar-brand menu_element" href="#">
               <img src="../assets/img/logo.jpeg"  alt="" class="center">
         </a>
       </div>
+      <div class="col-md-6"></div>
+     <div class="col-md-1">
+      <a class="nav-link  menu_element text-white text-right" href="" *ngIf="this.isNameUserExist" >
+        Welcome,{{this.client.nom}}</a>
+      <a class="nav-link  menu_element text-white" routerLink="/panier">
+        <!--<mat-icon [matBadge]="this.monpanier?.length" [matBadgeHidden]="this.monpanier?.length < 1"
+                  matBadgeColor="warn">add_shopping_cart</mat-icon>-->
+      </a>
+     </div>
 
 
 

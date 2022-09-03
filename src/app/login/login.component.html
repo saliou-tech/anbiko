@@ -15,16 +15,16 @@
 
         <div class="form-data" v-if="!submitted">
           <div class="forms-inputs mb-3">
-            <span>Email </span>
-            <input class="w-100" autocomplete="off" type="text" v-model="email">
+            <span>username </span>
+            <input class="w-100" autocomplete="off" type="text" v-model="username"  name="username" placeholder="username" [(ngModel)] = "this.userLogin.username">
             <div class="invalid-feedback">A valid email is required!</div>
           </div>
           <div class="forms-inputs mb-4">
             <span>Password</span>
-            <input  class="w-100" autocomplete="off" type="password" v-model="password">
+            <input  class="w-100" autocomplete="off" type="password" v-model="password" placeholder="Password"  name="password"   [(ngModel)] = "this.userLogin.password">
             <div class="invalid-feedback">Password must be 8 character!</div>
           </div>
-          <div class="mb-3 btn-color"> <button routerLink="/home"type="submit" class="btn btn-color w-100">Login</button> </div>
+          <div class="mb-3 btn-color"> <button type="submit" class="btn btn-color w-100"  [class.spinner]="loading" [disabled]="loading" (click)="logAdmin()" >Login</button> </div>
         </div>
 
       </div>
