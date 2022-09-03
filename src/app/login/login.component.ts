@@ -28,9 +28,10 @@ export class LoginComponent implements OnInit {
 
 
   }
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string,className: string) {
     this.snackBar.open(message, action, {
       duration: 4000,
+      panelClass: [className]
 
 
     });
@@ -55,7 +56,7 @@ export class LoginComponent implements OnInit {
               nom:this.userLogin.username,
 
             }
-            this.openSnackBar("Connexion reussi", "")
+            this.openSnackBar("Connexion reussi", "close","green-snackbar")
           //JSON.stringify(this.currentUser.data)
           localStorage.setItem('user',JSON.stringify(this.currentUser))
             this.loading = true;
