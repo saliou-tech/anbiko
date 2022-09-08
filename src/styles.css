@@ -6,5 +6,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .green-snackbar {
   background: green;
+  margin: 0 !important;
+  position: absolute;
+  right: 25px;
+  top: 60px;
 }
 

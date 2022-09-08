@@ -111,6 +111,9 @@
       </div>
       <div class="modal-body">
         <form class="row g-3">
+          <div class="alert alert-danger form-group col-sm-10 offset-sm-1" role="alert" *ngIf = "isErrorField">
+            <strong>{{this.messageField}}</strong>
+          </div>
           <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Nom</label>
             <input type="text" class="form-control" id="inputEmail4" [(ngModel)]="this.membre.nom" name="nom">
@@ -146,6 +149,11 @@
       <div class="modal-footer">
         <button type="button" class="btn " data-bs-dismiss="modal">Annuler</button>
         <button type="button" class="btn add_categorie" (click)="ajouterMembres()">Ajouter</button>
+
+      </div>
+      <div *ngIf="this.showSpinner">
+        <mat-progress-bar mode="query"></mat-progress-bar>
+
       </div>
     </div>
   </div>

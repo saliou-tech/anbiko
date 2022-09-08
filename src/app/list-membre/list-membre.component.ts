@@ -15,6 +15,8 @@ export class ListMembreComponent implements OnInit, OnChanges {
   displayedColumns: (string | undefined)[] = ['id', 'nom', 'prenom', 'ville', 'commune', 'telephone'];
   villes: String[] | undefined;
   communes: String[] | undefined;
+  showSpinner=false;
+  erroField=false;
   membre: any
   listmembre: any;
   dataSource : any;
@@ -24,8 +26,10 @@ export class ListMembreComponent implements OnInit, OnChanges {
   isVilleNotValid=false;
   isCommuneNotValid=false;
   isTelephoneNotValid=false;
+  isErrorField=false;
+  messageField= String;
 
-
+  message: string | undefined;
 
 
   constructor(private userservice: UserService,private snackBar: MatSnackBar) {
@@ -99,17 +103,37 @@ export class ListMembreComponent implements OnInit, OnChanges {
   ajouterMembres() {
     console.log(this.membre);
     this.loading = true;
-    if(this.membre.nom==='' ||this.membre.nom<2 ){
+    this.showSpinner=false;
+
+    if(this.membre.nom===null ||this.membre.nom.length<3 ){
       this.isNameNotValid =true;
-    }else  if(this.membre.prenom==='' ||this.membre.prenom<1 ){
-      this.isPrenomNotValid =true;    }
-    else  if(this.membre.ville==='' ||this.membre.ville<2 ){
-      this.isVilleNotValid =true;    }
-    else  if(this.membre.commune==='' ||this.membre.commune<2 ){
-      this.isCommuneNotValid =true;    }
-    else  if(this.membre.telephone==='' ||this.membre.telephone<3 ){
-      this.isTelephoneNotValid =true;    }
+      this.isErrorField=this.isNameNotValid;
+      this.messageField="le nom ne doit pas etre nul ou invalide";
+    }else  if(this.membre.prenom===null ||this.membre.prenom.length<3 ){
+      this.isPrenomNotValid =true;
+      this.isErrorField=this.isPrenomNotValid;
+      this.messageField="le prenom ne doit pas etre nul ou invalide";
+    }
+    else  if(this.membre.ville===null ||this.membre.ville.length<3 ){
+      this.isVilleNotValid =true;
+      this.isErrorField=this.isVilleNotValid;
+      this.messageField="la ville ne doit pas etre nulle ou invalide";
+    }
+    else  if(this.membre.commune===null ||this.membre.commune.length<3 ){
+      this.isCommuneNotValid =true;
+      this.isErrorField=this.isCommuneNotValid;
+      this.messageField="la commune ne doit pas etre nulle ou invalide";
+
+    }
+    else  if(this.membre.telephone===null ||this.membre.telephone.length<3 ){
+      this.isTelephoneNotValid =true;
+      this.isErrorField=this.isTelephoneNotValid;
+      this.messageField="le numéro de telephone ne doit pas etre nul ou invalide";
+
+    }
     else{
+      this.isErrorField=false;
+      this.messageField='';
       this.userservice.addMember(this.membre).subscribe(
         (data: any) => {
           console.log(data)
@@ -122,11 +146,11 @@ export class ListMembreComponent implements OnInit, OnChanges {
 
       this.ngOnInit();
          // this.router.navigate(['liste-membre']);
-        },(error: { status: number; }) => {
-          console.log('error', error);
-          if(error.status==200){
-
-          }
+        },(error: any) => {
+          console.log('error', error.error.message);
+          this.isErrorField=true
+          this.messageField =error.error.message
+          this.showSpinner=false;
 
         }
 
