@@ -12,7 +12,7 @@ export class UserService {
   public list_to_return : string[] | undefined;
 
 
-   baseurl = 'http://localhost:8084';
+   baseurl = 'http://ec2-3-80-216-151.compute-1.amazonaws.com:8080';
   // baseurl = 'http://localhost:8080';
   //baseurl =  'https://api-mouride-style-authentique.herokuapp.com'
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
